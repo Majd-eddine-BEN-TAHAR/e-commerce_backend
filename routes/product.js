@@ -43,7 +43,7 @@ router.post(
 
 router.delete("/carousel/:carouselImageId", deleteCarouselProduct);
 
-router.get("/", isAuth, getProducts);
+router.get("/", getProducts);
 
 router.post(
   "/",
