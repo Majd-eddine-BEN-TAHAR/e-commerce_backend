@@ -3,7 +3,7 @@ const router = require("express").Router();
 const isAuth = require("../middlewares/is-auth");
 const isAdmin = require("./../middlewares/is-admin");
 
-const { updateOrder } = require("./../controllers/admin");
+const { updateOrder, getAllOrders } = require("./../controllers/admin");
 
 const {
   placeOrder,
@@ -27,6 +27,8 @@ router.post(
   validateOrder,
   placeOrder
 );
+
+router.get("/admin", isAuth, isAdmin, getAllOrders);
 
 router.get(
   "/:orderId",

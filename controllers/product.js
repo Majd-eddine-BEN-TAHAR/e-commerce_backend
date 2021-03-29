@@ -17,7 +17,11 @@ exports.getProducts = asyncHandler(async (req, res) => {
 exports.getProductById = asyncHandler(async (req, res) => {
   const { productId } = req.params;
 
-  const _product = await Product.findOne({ _id: productId }).select("-__v");
+  // const _product = await Product.findOne({ _id: productId }).select("-__v");
+  const _product = await Product.findOne({ _id: productId }).populate({
+    path: "reviews.userId",
+    select: "name",
+  });
 
   if (!_product) throw customError(404, "Product not found");
 

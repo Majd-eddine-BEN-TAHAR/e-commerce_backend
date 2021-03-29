@@ -50,6 +50,11 @@ exports.updateUserRole = asyncHandler(async (req, res) => {
   });
 });
 
+exports.getAllOrders = asyncHandler(async (req, res) => {
+  const _orders = await Order.find().select("");
+  res.json({ _orders });
+});
+
 exports.updateOrder = asyncHandler(async (req, res) => {
   const { orderId } = req.params;
   const { delivered } = req.body;

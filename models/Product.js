@@ -36,6 +36,10 @@ const productSchema = new Schema(
         },
         rating: { type: Number, required: true },
         comment: { type: String, required: true },
+        createdAt: {
+          type: Date,
+          default: new Date().getTime(),
+        },
       },
     ],
     generalRating: { type: Number, default: 0 },
