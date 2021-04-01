@@ -49,7 +49,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
   const orderId = req.params.orderId;
   const _order = await Order.findOne({
     _id: orderId,
-  }).select("-createdAt -updatedAt -__v ");
+  }).select(" -updatedAt -__v ");
 
   if (
     _order.userId.toString() !== req.user._id.toString() &&
