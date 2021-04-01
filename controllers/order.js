@@ -51,7 +51,10 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     _id: orderId,
   }).select("-createdAt -updatedAt -__v ");
 
-  if (_order.userId !== req.user._id && req.user.role !== "admin")
+  if (
+    _order.userId.toString() !== req.user._id.toString() &&
+    req.user.role !== "admin"
+  )
     throw customError(403, "Not authorized,admin resources");
 
   res.status(200).json({ _order });
