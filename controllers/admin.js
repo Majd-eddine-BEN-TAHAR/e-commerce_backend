@@ -12,7 +12,7 @@ const rootDir = require("./../utils/rootDir");
 
 exports.getUsers = asyncHandler(async (req, res) => {
   const _users = await User.find().select("_id role name email");
-  res.json({ _users });
+  res.status(200).json({ _users, status: 200 });
 });
 
 exports.getUserById = asyncHandler(async (req, res) => {
@@ -34,7 +34,7 @@ exports.deleteUser = asyncHandler(async (req, res) => {
 
   if (!_user) throw customError(404, "no such user with this _id");
 
-  res.status(200).json({ result: "user deleted successfully!" });
+  res.status(200).json({ status: 200, result: "user deleted successfully!" });
 });
 
 exports.updateUserRole = asyncHandler(async (req, res) => {
@@ -46,13 +46,13 @@ exports.updateUserRole = asyncHandler(async (req, res) => {
 
   _user.save((err) => {
     if (err) throw customError(500, "Internal Server Error");
-    res.status(200).json({ _user });
+    res.status(200).json({ status: 200, result: "role updated successfully" });
   });
 });
 
 exports.getAllOrders = asyncHandler(async (req, res) => {
   const _orders = await Order.find().select("");
-  res.json({ _orders });
+  res.status(200).json({ status: 200, _orders });
 });
 
 exports.updateOrder = asyncHandler(async (req, res) => {
@@ -62,11 +62,11 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   const _order = await Order.findByIdAndUpdate(orderId, { delivered });
   if (!_order) throw customError(422, "order does not exist with this _id");
 
-  res.status(200).json({ result: "updated successfully" });
+  res.status(200).json({ status: 200, result: "updated successfully" });
 });
 
 exports.addCarouselProduct = asyncHandler(async (req, res) => {
-  if (!req.file) throw customError(400, `you didn't attach any image`);
+  if (!req.file) throw customError(400, `you didn't attach any image333`);
 
   const _carouselImage = await CarouselImage.create({
     image_url: req.file.path,

@@ -1,3 +1,4 @@
+const customError = require("http-errors");
 const multer = require("multer");
 const crypto = require("crypto");
 
@@ -17,9 +18,11 @@ const fileFilter = (req, file, cb) => {
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg"
   ) {
+    console.log("iff" + file);
     cb(null, true);
   } else {
-    cb(null, false);
+    cb(customError(404, "no such user with this _id"));
+    // cb(null, false);
   }
 };
 

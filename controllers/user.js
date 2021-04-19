@@ -15,6 +15,7 @@ exports.signup = asyncHandler(async (req, res) => {
   const _user = await User.create({ name, email, password });
 
   res.status(201).json({
+    status: 200,
     _id: _user._id,
     name: _user.name,
     email: _user.email,
@@ -34,6 +35,7 @@ exports.login = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     _id: _user._id,
+    status: 200,
     name: _user.name,
     email: _user.email,
     role: _user.role,

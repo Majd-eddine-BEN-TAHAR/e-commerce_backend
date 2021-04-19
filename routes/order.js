@@ -31,7 +31,7 @@ router.post(
 router.get("/admin", isAuth, isAdmin, getAllOrders);
 
 router.get(
-  "/:orderId",
+  "/admin/:orderId",
   isAuth,
   getOrderByIdValidationRules(),
   validateOrder,
@@ -39,7 +39,7 @@ router.get(
 );
 
 router.put(
-  "/:orderId",
+  "/admin/:orderId",
   isAuth,
   isAdmin,
   updateOrderValidationRules(),
