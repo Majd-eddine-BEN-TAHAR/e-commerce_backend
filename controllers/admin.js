@@ -66,10 +66,15 @@ exports.updateOrder = asyncHandler(async (req, res) => {
 });
 
 exports.addCarouselProduct = asyncHandler(async (req, res) => {
-  if (!req.file) throw customError(400, `you didn't attach any image333`);
+  if (!req.file) throw customError(400, `you didn't attach any image`);
+
+  const image_name = req.file.filename;
+  const oldPath = path.join(rootDir, "tmp", image_name);
+  const newPath = path.join(rootDir, "uploads", image_name);
+  await moveFile(oldPath, newPath);
 
   const _carouselImage = await CarouselImage.create({
-    image_url: req.file.path,
+    image_url: "uploads/" + image_name,
   });
 
   if (!_carouselImage) throw customError(500, "Internal Server Error");

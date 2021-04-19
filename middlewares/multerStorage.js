@@ -21,8 +21,7 @@ const fileFilter = (req, file, cb) => {
     console.log("iff" + file);
     cb(null, true);
   } else {
-    cb(customError(404, "no such user with this _id"));
-    // cb(null, false);
+    cb(customError(415, "Accept only PNG or JPEG or PNG files"));
   }
 };
 
