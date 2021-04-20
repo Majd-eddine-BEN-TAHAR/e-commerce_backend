@@ -18,7 +18,6 @@ const fileFilter = (req, file, cb) => {
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg"
   ) {
-    console.log("iff" + file);
     cb(null, true);
   } else {
     cb(customError(415, "Accept only PNG or JPEG or PNG files"));

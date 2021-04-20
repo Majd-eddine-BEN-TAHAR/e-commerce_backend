@@ -30,7 +30,7 @@ exports.getProductById = asyncHandler(async (req, res) => {
 
 exports.getCarouselProducts = asyncHandler(async (req, res) => {
   const _products = await CarouselImage.find().select("-__v");
-  res.status(200).json({ _products });
+  res.status(200).json({ status: 200, _products });
 });
 
 exports.addReview = asyncHandler(async (req, res) => {

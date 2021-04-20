@@ -80,6 +80,7 @@ exports.addCarouselProduct = asyncHandler(async (req, res) => {
   if (!_carouselImage) throw customError(500, "Internal Server Error");
 
   res.status(201).json({
+    status: 201,
     message: "image added successfully",
     image_url: _carouselImage.image_url,
   });
@@ -96,7 +97,7 @@ exports.deleteCarouselProduct = asyncHandler(async (req, res) => {
 
   deleteFile(_carouselImageDoc.image_url);
 
-  res.status(200).json({ result: "image deleted successfully!" });
+  res.status(200).json({ status: 200, result: "image deleted successfully!" });
 });
 
 exports.addProduct = asyncHandler(async (req, res) => {

@@ -41,7 +41,12 @@ router.post(
   addCarouselProduct
 );
 
-router.delete("/carousel/:carouselImageId", deleteCarouselProduct);
+router.delete(
+  "/carousel/:carouselImageId",
+  isAuth,
+  isAdmin,
+  deleteCarouselProduct
+);
 
 router.get("/", getProducts);
 
