@@ -108,7 +108,7 @@ exports.addProduct = asyncHandler(async (req, res) => {
   const newPath = path.join(rootDir, "uploads", image_name);
   await moveFile(oldPath, newPath);
 
-  const _product = await Product.create({
+  Product.create({
     name,
     price,
     countInStock,
@@ -117,8 +117,7 @@ exports.addProduct = asyncHandler(async (req, res) => {
   });
 
   res.status(201).json({
-    _id: _product._id,
-    image_url: "uploads/" + image_name,
+    status: 201,
     message: "product created successfully",
   });
 });
@@ -149,9 +148,10 @@ exports.updateProduct = asyncHandler(async (req, res) => {
   _product.save((err) => {
     if (err) throw customError(500, "Internal Server Error");
 
-    res
-      .status(200)
-      .json({ _product, message: "product updated successfully!" });
+    res.status(200).json({
+      status: 200,
+      message: "product updated successfully!",
+    });
   });
 });
 
@@ -164,5 +164,7 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
 
   if (!_product) throw customError(404, "no such product with this _id");
 
-  res.status(200).json({ result: "product deleted successfully!" });
+  res
+    .status(200)
+    .json({ status: 200, result: "product deleted successfully!" });
 });

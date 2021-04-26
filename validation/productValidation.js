@@ -10,12 +10,12 @@ const deleteFile = require("./../utils/deleteFile");
 const addReviewValidationRules = () => {
   return [
     body("comment")
-      .isLength({ min: 2 })
-      .withMessage("invalid comment, minimum length 2")
+      .isLength({ min: 1 })
+      .withMessage("invalid comment, minimum length 1")
       .bail(),
     body("rating")
       .isInt({ min: 1, max: 5 })
-      .withMessage("rating should be an integer between 0 & 5"),
+      .withMessage("rating should be an integer between 1 & 5"),
   ];
 };
 

@@ -6,8 +6,8 @@ const isAdmin = require("./../middlewares/is-admin");
 const { updateOrder, getAllOrders } = require("./../controllers/admin");
 
 const {
-  placeOrder,
   getOrders,
+  placeOrder,
   getOrderById,
 } = require("./../controllers/order");
 

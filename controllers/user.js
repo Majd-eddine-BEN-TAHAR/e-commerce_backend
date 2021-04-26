@@ -53,6 +53,7 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   // ! make sure to change the url when you deploy because it's localhost:3000
   const resetToken = crypto.randomBytes(32).toString("hex");
   const ONE_HOUR = 60 * 60 * 1000;
+  // const ONE_HOUR = 1;
   const resetTokenExpiration = new Date().getTime() + ONE_HOUR;
   _user.resetToken = resetToken;
   _user.resetTokenExpiration = resetTokenExpiration;
@@ -61,7 +62,8 @@ exports.resetPassword = asyncHandler(async (req, res) => {
     if (err) throw customError(500, "Internal Server Error");
     sendEmail(resetToken, email);
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       message: `success, check your email inbox or try again in few seconds.`,
     });
   });
@@ -83,13 +85,13 @@ exports.updatePassword = asyncHandler(async (req, res) => {
   _user.resetTokenExpiration = undefined;
   _user.save((err) => {
     if (err) throw customError(500, "Internal Server Error");
-    res.json({ success: "success" });
+    res.json({ status: 200, message: "password updated successfully!" });
   });
 });
 
 exports.getProfile = asyncHandler(async (req, res) => {
   const _user = await User.findOne({ _id: req.user._id }).select(
-    "role _id name email"
+    "role name email"
   );
   if (!_user) customError(404, "User Not found");
 
@@ -102,6 +104,9 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 
   const { name, email, password } = req.body;
 
+  if (password && password.length > 0 && password.length < 8)
+    throw customError(422, "Please enter at least 8 characters for password.");
+
   if (_user.email !== email && email.length !== 0) {
     const emailExist = await User.findOne({ email: email });
     if (emailExist)
@@ -112,11 +117,13 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   _user.email = email || _user.email;
   _user.password = password || _user.password;
 
-  _user.save((err, result) => {
+  _user.save((err) => {
     if (err) throw customError(500, "Internal Server Error");
 
-    const { name, role, email, _id } = result;
-    res.status(200).json({ profile: { name, role, email, _id } });
+    res.status(200).json({
+      status: 200,
+      message: "profile updated successfully!!",
+    });
   });
 });
 

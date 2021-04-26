@@ -18,7 +18,7 @@ const mailDetails = (token, email) => {
     html: `
     <div>
         <p style="font-size:20px;font-weight:700">hello sir, this is the link to reset your password, it's available only for 1 hour</p>
-        <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
+        <p>Click this <a href="${process.env.FRONT_END_URL}/reset-password/${token}">link</a> to set a new password.</p>
     </div>
     `,
   };

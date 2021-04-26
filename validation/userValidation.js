@@ -28,10 +28,10 @@ const loginValidationRules = () => {
 const updatePasswordValidationRules = () => {
   return [
     body("password")
-      .isLength({ min: 4 })
+      .isLength({ min: 8 })
       .withMessage("invalid password, minimum length 4"),
     body("confirmPassword")
-      .isLength({ min: 4 })
+      .isLength({ min: 8 })
       .withMessage("invalid confirm password value, minimum length 4")
       .bail()
       .custom((confirmPassword, { req }) => {

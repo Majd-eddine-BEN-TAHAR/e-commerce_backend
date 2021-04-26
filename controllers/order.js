@@ -35,14 +35,16 @@ exports.placeOrder = asyncHandler(async (req, res) => {
     shipping_address: shipping_address,
   });
 
-  res.status(201).json({ _order });
+  res
+    .status(201)
+    .json({ status: 201, message: "order placed successfully!", _order });
 });
 
 exports.getOrders = asyncHandler(async (req, res) => {
   const _orders = await Order.find({ userId: req.user._id }) //
-    .select("_id totalAmount delivered paid createdAt");
+    .select("_id products totalAmount delivered paid createdAt");
 
-  res.status(200).json({ _orders });
+  res.status(200).json({ status: 200, _orders });
 });
 
 exports.getOrderById = asyncHandler(async (req, res) => {

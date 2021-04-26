@@ -11,6 +11,7 @@ const notFound = require("./middlewares/404");
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
 const orderRoutes = require("./routes/order");
+const customerServicesRoutes = require("./routes/customerServicesRoutes");
 
 const app = express();
 /*eslint-env node*/
@@ -32,6 +33,8 @@ app.use("/products", productRoutes);
 app.use("/users", userRoutes);
 
 app.use("/orders", orderRoutes);
+
+app.use("/customer-services", customerServicesRoutes);
 
 app.use(notFound);
 

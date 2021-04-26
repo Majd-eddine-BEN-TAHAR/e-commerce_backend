@@ -11,7 +11,7 @@ exports.getProducts = asyncHandler(async (req, res) => {
   const _products = await Product.find({ name: { $regex: regex } }).select(
     "-__v"
   );
-  res.status(200).json({ _products });
+  res.status(200).json({ status: 200, _products });
 });
 
 exports.getProductById = asyncHandler(async (req, res) => {
@@ -50,6 +50,6 @@ exports.addReview = asyncHandler(async (req, res) => {
 
   _product.save((err) => {
     if (err) throw customError(500, "Internal Server Error");
-    res.status(200).json({ message: "review added successfully" });
+    res.status(201).json({ status: 201, message: "review added successfully" });
   });
 });
